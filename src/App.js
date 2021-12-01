@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import Inicio from './pages/Inicio'
+import Proyectos from './pages/Proyectos'
+import Header from './templates/header';
+import Dashboard from './pages/Dashboard'
+import ListadoProyectos from './components/proyecto/proyectos';
+import ListadoTecnologias from './components/tecnologia/tecnologias';
+import ListadoPerfiles from './components/perfil/perfiles';
+
+function App(props){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header/>
+    <BrowserRouter>
+    <Switch>
+      <Route path="/" exact component={Inicio}  />
+      <Route path="/proyectos" exact component={Proyectos} />
+      <Route path="/dashboard" exact component={Dashboard}/>
+      <Route path="/ver-proyectos" exact component = {ListadoProyectos} />
+      <Route path="/ver-tecnologias" exact component = {ListadoTecnologias} />
+      <Route path="/ver-perfiles" exact component = {ListadoPerfiles} />
+    </Switch>
+    </BrowserRouter>
+    {/* <Inicio nombre='Andres' apellido={props.apellido}/> */}
+    </>
   );
 }
 

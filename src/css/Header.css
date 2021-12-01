@@ -1,0 +1,17 @@
+.social-networks{
+    background-color: 
+    #F1C40F
+    ;
+  
+    
+}
+
+/* .cabecera{
+    position: fixed;
+} */
+
+.iconos{
+    display: flex;
+    justify-content: right;
+    padding-right: 100px;
+}

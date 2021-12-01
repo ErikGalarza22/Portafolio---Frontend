@@ -1,0 +1,31 @@
+.contenedor-etiqueta{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    padding:0 10px;
+    margin:0;
+    position: absolute;
+    z-index: 1;
+    background-color: #566573;
+    -webkit-transform: skew(20deg);
+    -moz-transform: skew(20deg);
+    -ms-transform: skew(20deg);
+    -o-transform: skew(20deg);
+    transform: skew(20deg);
+}
+
+.contenedor-etiqueta p{
+    color:white;
+}
+
+@media screen and (max-width:555px) {
+    .contenedor-etiqueta{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 1rem;
+    
+    }
+}

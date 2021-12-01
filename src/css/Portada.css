@@ -1,0 +1,77 @@
+.imgFondo{
+    max-width: 100%;
+}
+
+.fondo{
+  background-image: url("../img/zig-zag.svg");
+background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center center;
+  max-height: 100%;
+
+  
+}
+
+.box{
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.contenedor-card{
+  display: flex;
+  justify-content: center;
+  padding: 10px ;
+}
+
+/* .fondo .box .contenedor-card{
+  padding-bottom: 10px 10px;
+} */
+
+
+@media screen and (min-width:780px) {
+  .box{
+  display: flex;
+  }
+  
+  .contenedor-card{
+  flex: 0 1 calc(50% - 1rem);
+  }
+  }
+
+
+  @media screen and (min-width:480px) {
+    .box{
+    display: flex;
+    flex-wrap: wrap;
+    }
+    
+    .contenedor-card{
+    flex: 0 1 calc(50% - 1rem);;
+    }
+    }
+
+
+
+/* .fondo .box{
+    align-content: center;
+    background-color: white;
+    align-content: center;
+    justify-content: center;
+}
+
+.fondo .box h2{
+    justify-content: center;
+    text-align: center;
+} */
+
+/* #fondo{
+    height: 400px;
+  background-image: url("https://carontestudio.com/img/caronte-web-estudio-logo.png");
+background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center center;
+
+} */
