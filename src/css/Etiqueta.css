@@ -1,0 +1,17 @@
+.contenedor-texto{
+padding: 5px 10px;
+background:#34495E;
+
+/* #428bca */
+/* position:relative; */
+height:50px;
+max-width:600px;
+border: 3px solid #E74C3C;
+-moz-border-radius: 0 50% / 0 100%;
+-webkit-border-radius: 0 50% / 0 100%;
+border-radius: 0 50% / 0 100%;
+font-size:22px;
+color:white;
+font-weight:bold;
+
+}

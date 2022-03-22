@@ -1,0 +1,37 @@
+.barra-navegacion{
+    background-color: #F4D03F
+    ;
+}
+
+.enlaces .items{
+    display: flex;
+    justify-content: center!important;
+    align-items: center !important;
+}
+
+/* .items ul{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+
+
+/* .navigation nav .enlaces a{
+    color:orange;
+} */
+
+.navigation nav .enlaces .collapse ul li .nav-link{
+    color: white;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.items ul{
+    display: flex;
+}
+
+.items ul li{
+    justify-content: center;
+}

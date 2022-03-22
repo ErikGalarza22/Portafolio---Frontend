@@ -1,0 +1,123 @@
+.fondoTecnologias{
+  /* background-image: url("../img/zig-zag.svg"); */
+/* background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center center; */
+  background:#34495E;
+  max-height: 100%;
+}
+#info-table-tecnologias{
+  width:100vh;
+  height:100%;
+  /* padding-top:20px;
+  padding-left:30px; */
+  text-align:center;
+  font-weight:500;
+  font-size:24px;
+  color:rgb(112, 110, 110);
+}
+
+.imagen{
+  margin-top:100px;
+}
+.imagen img{
+  width:100px;
+  height:100px;
+  /* border-radius:50%; */
+}
+
+.contenedor-tecnologias{
+  margin-left:100px;
+  margin-right:100px;
+  
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  justify-content:space-evenly;
+}
+
+.contenedor-individual img{
+  max-width: 100%;
+}
+.fondoTecnologias .contenedor-tecnologias
+{
+  padding:2rem ;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+
+.cotenedor-etiqueta{
+  display: flex;
+  justify-content: center;
+
+}
+
+.contenedor-texto{
+  text-align: center;
+}
+
+.contenedor-individual{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 200px; */
+  /* width: 200px; */
+  padding:4rem 1rem;
+}
+.contenedor-individual .imagen{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-individual .nombre{
+  font-size: 1rem;
+  color: white;
+  font-weight: 800;
+}
+
+
+/* 
+Media queries */
+
+@media screen and (min-width:350px) {
+  .contenedor-tecnologias{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  }
+  
+  .contenedor-individual{
+  flex: 0 1 calc(70% - 1rem);;
+  }
+  }
+
+
+@media screen and (min-width:480px) {
+  .contenedor-tecnologias{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  }
+  
+  .contenedor-individual{
+  flex: 0 1 calc(50% - 1rem);
+  }
+  }
+
+
+@media screen and (min-width:768px) {
+.contenedor-tecnologias{
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+
+.contenedor-individual{
+flex: 0 1 calc(33% - 1rem);;
+}
+}
+
+

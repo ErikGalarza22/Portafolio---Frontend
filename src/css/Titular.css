@@ -1,0 +1,14 @@
+.titular{
+    display: flex;
+    justify-content: center;/*centrado en horizontal*/
+    align-items: center; /*centrado en el eje Y o vertical*/
+    height: 100px;
+    background-color: #E74C3C;
+    
+
+}
+
+.titular h2{
+    color: white;
+    font-weight: 800;
+}
