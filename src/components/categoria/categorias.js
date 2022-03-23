@@ -1,13 +1,13 @@
 import React ,{useState, useEffect}from 'react';
 import { Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { getAllTecnologias, postTecnologia,deleteTecnologia, updateTecnologia } from '../../services/tecnologia';
+import { getAllCategorias, postCategoria, updateCategoria, deleteCategoria} from '../../services/categoria';
 import '../../css/Tecnologia.css'
 
 
-const ListadoTecnologias = () => {
+const ListadoCategorias = () => {
 
-    const [tecnologias, setTecnologias] = useState([]) 
+    const [categorias, setCategorias] = useState([]) 
      /* variables para los modales   */
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -22,32 +22,26 @@ const ListadoTecnologias = () => {
   /* variables para los campos del formulario y los estados de la pagina */
   const [values, setValues] = useState({
     nombre: "",
-    tipo: "",
     loading: false,
     error: "",
-    idTec:0,
     formData: "",
     formData2: "",
-    url:"",
-    idTecno:0,
-    // createdVideogame: '',
-    // redirectToProfile: false,
+    idCat : 0,
   });
 
   const {
     nombre,
-    tipo,
     loading,
-    idTec,
-    url,
+    error,
     formData,
     formData2,
+    idCat,
   } = values;
 
 
-    const getTecnologias = ()=>{
-        getAllTecnologias().then(data=>{
-            setTecnologias(data.data);
+    const getCategorias = ()=>{
+        getAllCategorias().then(data=>{
+            setCategorias(data.data);
         }).catch(err=>{
             console.log(err.message)
         })
@@ -70,12 +64,10 @@ const ListadoTecnologias = () => {
     }
 
     const handleChangeEdit = (name) => (event) => {
-      console.log('entrando a edit');
       const value = name === "foto" ? event.target.files[0] : event.target.value;
       formData2.set(name, value);
       console.log(formData2);
       setValues({ ...values, [name]: value });
-      console.log('saliendo del edit');
     };
 
      // lector de campos input de modal agregar proyecto
@@ -88,10 +80,10 @@ const ListadoTecnologias = () => {
 
  
 
-  const eliminarTecnologia= (tecnologia)=>{
+  const eliminarCategoria= (categoriaSeleccionada)=>{
     Swal.fire({
         title: "Eliminar tecnología ",
-        text: "¿Está seguro de eliminar tecnología "+tecnologia.nombre+"?",
+        text: "¿Está seguro de eliminar categoría "+categoriaSeleccionada.nombre+"?",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: "Sí, eliminar",
@@ -99,9 +91,9 @@ const ListadoTecnologias = () => {
     })
     .then(resultado => {
       if(resultado.value){
-        deleteTecnologia(tecnologia._id);
-        Swal.fire({text:'Tecnología eliminada', icon:'success', timer:3000});
-        getTecnologias();
+        deleteCategoria(categoriaSeleccionada._id);
+        Swal.fire({text:'Categoría eliminada', icon:'success', timer:3000});
+        getCategorias();
       }else{
         Swal.fire({text:'La categoría no fue eliminada', icon:'info', timer:2000})
       }
@@ -114,41 +106,38 @@ const ListadoTecnologias = () => {
 
 
     const clickSubmit = (event) => {
+        console.log(formData.get('nombre'));
       if(!existError){
         event.preventDefault();
           setValues({ ...values, error: "", loading: true });
-          postTecnologia(formData).then( data => {
+          postCategoria(formData).then( data => {
               setValues({
                 ...values,
                 nombre: '',
-                foto:'',
-                url:'',
-                tipo: '',
                 loading: false,
               });
               Swal.fire({
-                title: "Agregar tecnología",
-                text: "Tecnología agregada con exito!",
+                title: "Agregar categoría",
+                text: "Categoría agregada con exito!",
                 icon: "success",
                 timer: 3000,
-                // confirmButtonText: 'Aceptar'
               });
-              //recargamos los cambios
+             
              
               //escondemos el modal de ingreso de proyecto
               setShow(false);
-              getTecnologias();
+              getCategorias();
             }).catch(error=>{
               setValues({loading:false});
               Swal.fire({
-                title:'Error al agregar la tecnología',
-                text:'La tecnología no pudo ser agregada',
+                title:'Error al agregar la categoría',
+                text:'La categoría no pudo ser agregada',
                 icon:'info',
                 timer:2000
               });
               console.log(error.message);
             });
-          // getTecnologias();
+         
           setErrors({});
       }//fin if exist error
       };
@@ -157,7 +146,7 @@ const ListadoTecnologias = () => {
         event.preventDefault();
         setValues({ ...values, error: "", loading: true });
         console.log(formData2.get('nombre'));
-        updateTecnologia(formData2,idTecno).then((data) => {
+        updateCategoria(formData2,idTecno).then((data) => {
           if (data.error) {
             setValues({ ...values, error: data.error });
           } else {
@@ -165,13 +154,11 @@ const ListadoTecnologias = () => {
             setValues({
               ...values,
               nombre: "",
-              foto: "",
-              tipo: "",
               loading: false,
             });
             Swal.fire({
-              title: "Editar tecnología",
-              text: "Tecnología editada con exito!",
+              title: "Editar categoría",
+              text: "Categoría editada con exito!",
               icon: "success",
               timer: 3000,
             });
@@ -179,7 +166,7 @@ const ListadoTecnologias = () => {
             //escondemos el modal de edicion de tecnologia
             setShow2(false);
             // window.location.reload(false);
-            getTecnologias();
+            getCategorias();
           }
         });
       };
@@ -191,15 +178,15 @@ const ListadoTecnologias = () => {
         </div>
       )
 
-      const cargarDatos=(tec)=>{
-        console.log(tec);
-          setValues({...values, nombre:tec.nombre, tipo: tec.tipo, idTec:tec._id, url:tec.url});
+      const cargarDatos=(cat)=>{
+        console.log(cat);
+          setValues({...values, nombre:cat.nombre,  idCat:cat._id});
         handleShow2();
       }
 
     useEffect(()=>{
         setValues({ ...values, formData: new FormData() ,formData2: new FormData() });
-        getTecnologias();
+        getCategorias();
     },[])
 
     return (  
@@ -209,7 +196,7 @@ const ListadoTecnologias = () => {
         <a className="btn btn-success my-2 mx-2"
          onClick={handleShow}
          >
-          Agregar tecnología
+          Agregar Categoría
         </a>
       </div>
       <div className="contenedor-form">
@@ -217,30 +204,19 @@ const ListadoTecnologias = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Foto</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Tipo</th>
               <th scope="col">Opciones</th>
             </tr>
           </thead>
           <tbody>
          
-            {tecnologias.length>0 ? tecnologias.map((tec, i) => (
+            {categorias.length>0 ? categorias.map((cat, i) => (
               <tr key={i}>
                 <td>{i + 1}</td>
+                <td>{cat.nombre}</td>
                 <td>
-                  <img
-                    alt="img-tecnologia"
-                    style={{ maxWidth: "100px" }}
-                     src={tec.url}
-                  />
-                </td>
-                <td>{tec.nombre}</td>
-                <td>{tec.tipo===1?"frontend":
-                     tec.tipo===2?"backend":"base de datos"}</td>
-                <td>
-                  <a onClick={()=>cargarDatos(tec)} className="btn btn-warning mx-1">Editar</a>
-                  <a onClick={()=>eliminarTecnologia(tec)}  className="btn btn-danger">Eliminar</a>
+                  <a onClick={()=>cargarDatos(cat)} className="btn btn-warning mx-1">Editar</a>
+                  <a onClick={()=>eliminarCategoria(cat)}  className="btn btn-danger">Eliminar</a>
                 </td>
               </tr>
             )) : (<p id="info-table-tecnologias">No hay registros</p>)}
@@ -248,26 +224,12 @@ const ListadoTecnologias = () => {
         </table>
       </div>
 
- {/* MODAL PARA CREAR LA TECNOLOGIA */}
+ {/* MODAL PARA CREAR LA CATEGORÍA */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Agregar tecnología</Modal.Title>
+          <Modal.Title>Agregar categoría</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="form-group">
-            <label className="text-muted">Categoría</label>
-            <select
-              onChange={handleChange("tipo")}
-              type="text"
-              className="form-control"
-              required
-            >
-              <option>Seleccione un tipo</option>
-              <option value="1">Frontend</option>
-              <option value="2">Backend</option>
-              <option value="3">Base de datos</option>
-            </select>
-          </div>
           <div className="form-group">
             <label>Nombre</label>
             <input
@@ -275,23 +237,12 @@ const ListadoTecnologias = () => {
               onBlur={handleBlur}
               onChange={handleChange("nombre")}
               type="text"
-              placeholder="Ingrese el nombre de la tecnología"
+              placeholder="Ingrese el nombre de la categoría"
               required
             />
           </div>
           {errors.nombre && (<p style={{color:'red', fontWeight:'bold'}}>El nombre es requerido</p>)}
 
-          <label>Foto</label>
-          <div className="form-group my-2">
-            <input
-              onChange={handleChange("foto")}
-              type="file"
-              name="foto"
-              accept="image/*"
-              required
-              onClick={e => (e.target.value = null)}
-            />
-          </div>
         </Modal.Body>
         <Modal.Footer>
         <Button variant="primary" onClick={(handleClose, clickSubmit)}>
@@ -310,20 +261,7 @@ const ListadoTecnologias = () => {
           <Modal.Title>Editar tecnología</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="form-group">
-            <label className="text-muted">Categoría</label>
-            <select
-              onChange={handleChangeEdit("tipo")}
-              className="form-control" 
-              value={tipo}
-              required
-            >
-              <option>Seleccione un tipo</option>
-              <option value="1">Frontend</option>
-              <option value="2">Backend</option>
-              <option value="3">Base de datos</option>
-            </select>
-          </div>
+    
           <div className="form-group">
             <label>Nombre</label>
             <input
@@ -335,25 +273,9 @@ const ListadoTecnologias = () => {
               required
             />
           </div>
-
-          <label>Foto actual</label>
-          <img
-                    alt="img-tecnologia"
-                    style={{ maxWidth: "100px" }}
-                     src={url}
-                  />
-          <div className="form-group my-2">
-            <input
-              onChange={handleChangeEdit("foto")}
-              type="file"
-              name="foto"
-              accept="image/*"
-              required
-            />
-          </div>
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="primary" onClick={(handleClose2, clickSubmitEdit(idTec))}>
+        <Button variant="primary" onClick={(handleClose2, clickSubmitEdit(idCat))}>
             Guardar
           </Button>
           <Button variant="secondary" onClick={handleClose2}>
@@ -366,4 +288,4 @@ const ListadoTecnologias = () => {
     );
 }
  
-export default ListadoTecnologias;
+export default ListadoCategorias;
